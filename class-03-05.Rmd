@@ -1,0 +1,21 @@
+---
+title: "class-03-05"
+author: "Henry Zhu"
+date: "March 5, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r, echo=FALSE}
+library(gapminder)
+library(tidyverse)
+library(gganimate)
+gapminder%>%
+  filter(year==1952, continent %in% c("Americas","Africa","Asia"))%>%
+  mutate(continent=fct_collapse(continent,Asia=c("Asia","Oceania")))%>%
+  ggplot(aes(x=log10(gdpPercap), y= lifeExp,size=pop,color = country)) + geom_point(alpha=0.5,show.legend = FALSE)+
+           facet_wrap(~continent)
+  
+```
